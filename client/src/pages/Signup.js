@@ -8,6 +8,7 @@ class Signup extends Component {
             email: '',
             password: '',
             password_confirmation: '',
+            role: '',
             errors: ''
         };
     }
@@ -19,12 +20,13 @@ class Signup extends Component {
     };
     handleSubmit = (event) => {
         event.preventDefault()
-        const { username, email, password, password_confirmation } = this.state
+        const { username, email, password, password_confirmation, role } = this.state
         let user = {
             username: username,
             email: email,
             password: password,
-            password_confirmation: password_confirmation
+            password_confirmation: password_confirmation,
+            role: role
         }
         axios.post('http://localhost:3001/users', { user }, { withCredentials: true })
             .then(response => {
@@ -52,7 +54,7 @@ class Signup extends Component {
         )
     }
     render() {
-        const { username, email, password, password_confirmation } = this.state
+        const { username, email, password, password_confirmation, role } = this.state
         return (
             <div>
                 <h1>Sign Up</h1>
@@ -69,6 +71,13 @@ class Signup extends Component {
                         type="text"
                         name="email"
                         value={email}
+                        onChange={this.handleChange}
+                    />
+                    <input
+                        placeholder="role"
+                        type="text"
+                        name="role"
+                        value={role}
                         onChange={this.handleChange}
                     />
                     <input

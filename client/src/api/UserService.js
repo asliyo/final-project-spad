@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-export const is_loggedin = () => {
-    return axios.get(`http://localhost:3001/is_loggedin`);
+export const isLoggedin = () => {
+    return axios.get(`http://localhost:3001/logged_in`);
 };
 
 export const login = () => {
@@ -22,7 +22,7 @@ export const getUserByID = (id) => {
 
 
 const UserAPI = {
-    is_loggedin,
+    isLoggedin,
     login,
     allUsers,
     getUsers,

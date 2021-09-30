@@ -11,7 +11,8 @@ class Login extends Component {
             errors: ''
         };
     }
-    UNSAFE_componentWillMount() {
+    
+    componentWillMount() {
         return this.props.loggedInStatus ? this.redirect() : null
     }
     handleChange = (event) => {
