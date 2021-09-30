@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import Home from './pages/Home';
 import Login from './pages/Login'
 import Signup from './pages/Signup'
@@ -62,12 +62,13 @@ class App extends Component {
                 <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
               )}
             />
-            <Route
-              exact path='/dashboard'
-              render={props => (
-                <Dashboard loggedInStatus={this.state.isLoggedIn} />
-              )}
-            />
+            <Route exact path="/dashboard" render={() => (
+              this.state.isloggedIn ? (
+                <Dashboard/>
+              ) : (
+                <Redirect to="/login" />
+              )
+            )}/>
           </Switch>
         </BrowserRouter>
       </div>
