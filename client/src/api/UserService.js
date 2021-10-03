@@ -20,9 +20,14 @@ export const getUserByID = (id) => {
     return axios.get(`http://localhost:3001/users/${id}`);
 };
 
-export const logout = () => {
-    localStorage.removeItem("user");
-};
+// export const logout = (props) => {
+//     axios.delete('http://localhost:3001/logout', { withCredentials: true })
+//     .then(response => {
+//         props.handleLogout()
+//         props.history.push('/')
+//     })
+//     .catch(error => console.log(error))
+// };
 
 
 
@@ -32,7 +37,6 @@ const UserAPI = {
     allUsers,
     getUsers,
     getUserByID,
-    logout
 }
 
 export default UserAPI;

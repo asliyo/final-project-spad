@@ -13,12 +13,12 @@ const Navbar = (props) => {
     }
     return (
         <div>
-            <Link to='/dashboard'>See Dashboard</Link><br></br>
             {
                 props.loggedInStatus ? 
                     (
                         <>
                         <Link to='/logout' onClick={handleClick}>Log Out</Link>
+                        <Link to='/dashboard'>See Dashboard</Link>
                         </>
                     )
                 :
@@ -26,7 +26,6 @@ const Navbar = (props) => {
                         <>        
                         <Link to='/login'>Log In</Link><br></br>
                         <Link to='/signup'>Sign Up</Link><br></br>
-                        <Link to='/logout' onClick={handleClick}>Log Out</Link>
                         </>
                     )
         }
