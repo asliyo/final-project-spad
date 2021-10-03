@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+//import { Navbar, Container, Nav } from 'react-bootstrap'
 
 import Navbar from '../components/Navbar';
 
@@ -16,22 +16,7 @@ const Home = (props) => {
     return (
         <section>
         <div>
-            {
-                props.loggedInStatus ? 
-                    (
-                        <>
-                        <Link to='/dashboard'>See Personnels</Link><br></br>
-                        <Link to='/logout' onClick={handleClick}>Log Out</Link>
-                        </>
-                    )
-                :
-                    (
-                        <>        
-                        <Link to='/login'>Log In</Link><br></br>
-                        <Link to='/signup'>Sign Up</Link><br></br>
-                        </>
-                    )
-        }
+        <Navbar {...props} handleClick={handleClick}/>
         </div>
         <div>
             <h2>Final Project: <span>Admin Module</span></h2>

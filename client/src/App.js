@@ -6,6 +6,8 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Dashboard from './pages/Dashboard';
 import Personnels from './pages/Personnels';
+import PrivateRoute from './components/PrivateRoute';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -68,11 +70,10 @@ class App extends Component {
                 <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
               )}
             />
-            <Route 
-              exact path="/dashboard" 
-              render={props => (
-              <Dashboard  {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
-            )}/>
+            <PrivateRoute 
+              path="/dashboard" 
+              component={Dashboard}
+            />
             <Route 
               exact path="/personnels" 
               render={() => (

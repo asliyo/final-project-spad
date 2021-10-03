@@ -20,13 +20,19 @@ export const getUserByID = (id) => {
     return axios.get(`http://localhost:3001/users/${id}`);
 };
 
+export const logout = () => {
+    localStorage.removeItem("user");
+};
+
+
 
 const UserAPI = {
     isLoggedin,
     login,
     allUsers,
     getUsers,
-    getUserByID
+    getUserByID,
+    logout
 }
 
 export default UserAPI;
