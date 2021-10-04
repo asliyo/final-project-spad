@@ -5,10 +5,11 @@ class ApplicationController < ActionController::Base
       session[:user_id] = @user.id
     end
     def logged_in?
+      puts current_user.inspect
       !!session[:user_id]
     end
     def current_user
-      puts session.inspect
+      puts 'Hello!', session.inspect
       @current_user ||= User.find(session[:user_id]) if session[:user_id]
     end
     def authorized_user?
