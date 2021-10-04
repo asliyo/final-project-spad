@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import Home from './pages/Home';
-import Login from './pages/Login'
+import LoginNew from './pages/LoginNew'
 import Signup from './pages/Signup'
-import Dashboard from './pages/Dashboard';
 import Personnels from './pages/Personnels';
-import PrivateRoute from './components/PrivateRoute';
+import Dashboard from './pages/Dashboard';
 
 class App extends Component {
   constructor(props) {
@@ -24,7 +23,6 @@ class App extends Component {
       .then(response => {
         if (response.data.logged_in) {
           this.handleLogin(response)
-
           localStorage.setItem('uid', (response.data.user.id));
           const uid = localStorage.getItem('uid');
           console.log(uid)
@@ -47,6 +45,10 @@ class App extends Component {
       user: {}
     })
   }
+
+  handleLogoutClick(){
+    this.props.handleLogout();
+  }
   render() {
     return (
       <div>
@@ -55,13 +57,13 @@ class App extends Component {
             <Route
               exact path='/'
               render={props => (
-                <Home {...props} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} />
+                <Home {...props} handleLogin={this.handleLogin} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn} />
               )}
             />
             <Route
               exact path='/login'
               render={props => (
-                <Login {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
+                <LoginNew {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
               )}
             />
             <Route
@@ -70,15 +72,24 @@ class App extends Component {
                 <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
               )}
             />
-            <PrivateRoute 
+            <Route
+              exact path='/dashboard'
+              render={props => (
+                <Dashboard {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
+              )}
+            />
+            {/* <PrivateRoute 
               path="/dashboard" 
               component={Dashboard}
-            />
+            /> */}
             <Route 
               exact path="/personnels" 
               render={() => (
               <Personnels/>
             )}/>
+            <Route exact path="/logout">
+              { this.props.isLoggedIn ? <Redirect to="/"/> : <Home /> }
+            </Route>
 
           </Switch>
         </BrowserRouter>

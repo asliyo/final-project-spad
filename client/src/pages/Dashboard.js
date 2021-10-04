@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import axios from 'axios'
-//import UserAPI from "../api/UserService";
 
 
 const Dashboard = (props) => {

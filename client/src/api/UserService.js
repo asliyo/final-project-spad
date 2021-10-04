@@ -4,8 +4,8 @@ export const isLoggedin = () => {
     return axios.get(`http://localhost:3001/logged_in`);
 };
 
-export const login = () => {
-    return axios.post(`http://localhost:3001/login`);
+export const login = (data) => {
+    return axios.post('http://localhost:3001/login',{session: data}, { withCredentials: true });
 };
 
 export const allUsers = () => {

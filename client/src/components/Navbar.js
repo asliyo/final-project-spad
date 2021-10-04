@@ -1,13 +1,21 @@
 import React from 'react';
-import axios from 'axios'
-import { Link } from 'react-router-dom'
+import axios from 'axios';
+import { Navbar, Container, Nav } from 'react-bootstrap';
+import { useCookies } from "react-cookie";
+import { useHistory } from 'react-router';
 
-const Navbar = (props) => {
-    const handleClick = () => {
-        axios.delete('http://localhost:3001/logout', { withCredentials: true })
-            .then(response => {
-                props.handleLogout()
-                props.history.push('/')
+const NavMenu = (props) => {
+    const [cookies, removeCookie] = useCookies(["user"]);
+    const history = useHistory();
+
+    const handleLogoutClick = () => {
+        axios.delete('http://localhost:3001/logout', { withCredentials: true }).then(response => {
+                localStorage.clear();
+                history.push('/login');
+                removeCookie("user");
+                window.location.reload('/');
+                console.log(localStorage)
+                console.log(cookies.user)
             })
             .catch(error => console.log(error))
     }
@@ -17,15 +25,40 @@ const Navbar = (props) => {
                 props.loggedInStatus ? 
                     (
                         <>
-                        <Link to='/logout' onClick={handleClick}>Log Out</Link>
-                        <Link to='/dashboard'>See Dashboard</Link>
+                        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                        <Container>
+                        <Navbar.Brand href="/">Final Project</Navbar.Brand>
+                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                        <Navbar.Collapse id="responsive-navbar-nav">
+                            <Nav className="me-auto">
+                                <Nav.Link href='/dashboard'>See Dashboard</Nav.Link>
+                            </Nav>
+                            <Nav>
+                                <Nav.Link href='/logout' onClick={handleLogoutClick}>Logout</Nav.Link>
+                            </Nav>
+                        </Navbar.Collapse>
+                        </Container>
+                        </Navbar>
                         </>
                     )
                 :
                     (
-                        <>        
-                        <Link to='/login'>Log In</Link><br></br>
-                        <Link to='/signup'>Sign Up</Link><br></br>
+                        <>
+                        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                        <Container>
+                        <Navbar.Brand href="/">Final Project</Navbar.Brand>
+                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                        <Navbar.Collapse id="responsive-navbar-nav">
+                            <Nav className="me-auto">
+                                
+                            </Nav>
+                            <Nav className="me-auto">
+                                <Nav.Link href='/login'>Login</Nav.Link>
+                                <Nav.Link href='/signup'>Sign Up</Nav.Link>
+                            </Nav>
+                        </Navbar.Collapse>
+                        </Container>
+                        </Navbar>
                         </>
                     )
         }
@@ -33,4 +66,4 @@ const Navbar = (props) => {
 
     );
 };
-export default Navbar;
+export default NavMenu;

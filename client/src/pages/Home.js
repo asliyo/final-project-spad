@@ -1,27 +1,28 @@
 import React from 'react';
-import axios from 'axios'
-//import { Navbar, Container, Nav } from 'react-bootstrap'
-
-import Navbar from '../components/Navbar';
+import NavMenu from '../components/Navbar';
+import { Link } from 'react-router-dom';
+import LoginNew from './LoginNew';
+//import Login from './Login';
 
 const Home = (props) => {
-    const handleClick = () => {
-        axios.delete('http://localhost:3001/logout', { withCredentials: true })
-            .then(response => {
-                props.handleLogout()
-                props.history.push('/')
-            })
-            .catch(error => console.log(error))
-    }
     return (
         <section>
-        <div>
-        <Navbar {...props} handleClick={handleClick}/>
-        </div>
-        <div>
-            <h2>Final Project: <span>Admin Module</span></h2>
-        </div>
-
+            <div>
+            <NavMenu {...props} />
+            </div>
+            <div className="container">
+                { props.loggedInStatus ? (
+                    <>
+                        <h2>Status: Logged In</h2><br/>
+                        <Link to="/dashboard">See Personnels on Dashboard</Link>
+                    </>
+                    ) : (
+                    <>
+                        <LoginNew />
+                    </>
+                    )
+                }
+            </div>
         </section>
 
     );
