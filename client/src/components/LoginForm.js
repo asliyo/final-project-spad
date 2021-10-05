@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button } from 'react-bootstrap'
 
-export function UserForm({onSubmit}) {
+export function LoginForm({onSubmit}) {
   const [form, setForm] = useState({})
   
   const handleSubmit = (e) => {

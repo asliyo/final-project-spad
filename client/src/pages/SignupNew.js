@@ -1,13 +1,14 @@
 import React from 'react';
-import { UserForm } from '../components/Form';
+import { SignupForm } from '../components/SignupForm';
 import UserAPI from '../api/UserService';
 import { useHistory } from 'react-router';
+import NavMenu from '../components/Navbar';
 
-const LoginNew = (props) => {
+const SignupNew = (props) => {
     const history = useHistory();
     const handleSubmit = (data) => { 
         console.log(data)
-        UserAPI.login(data).then(response => {
+        UserAPI.signup(data).then(response => {
                 if (response.data.logged_in) {
                     sessionStorage.setItem('uid', response.data.user.id)
                     props.handleLogin(response.data)
@@ -23,8 +24,11 @@ const LoginNew = (props) => {
     };
 
     return (
-            <UserForm onSubmit={handleSubmit}/>
+        <>
+            <NavMenu {...props} />
+            <SignupForm onSubmit={handleSubmit}/>
+        </>
         )
 }
 
-export default LoginNew;
+export default SignupNew;

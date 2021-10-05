@@ -1,8 +1,7 @@
 import React from 'react';
 import NavMenu from '../components/Navbar';
 import { Link } from 'react-router-dom';
-import LoginNew from './LoginNew';
-//import Login from './Login';
+import Login from './Login';
 
 const Home = (props) => {
     return (
@@ -18,7 +17,7 @@ const Home = (props) => {
                     </>
                     ) : (
                     <>
-                        <LoginNew />
+                        <Login />
                     </>
                     )
                 }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios'
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import axios from 'axios';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Home from './pages/Home';
-import LoginNew from './pages/LoginNew'
-import Signup from './pages/Signup'
+import Login from './pages/Login';
+import SignupNew from './pages/SignupNew';
 import Personnels from './pages/Personnels';
 import Dashboard from './pages/Dashboard';
 
@@ -63,13 +63,13 @@ class App extends Component {
             <Route
               exact path='/login'
               render={props => (
-                <LoginNew {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
+                <Login {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
               )}
             />
             <Route
               exact path='/signup'
               render={props => (
-                <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
+                <SignupNew {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn} />
               )}
             />
             <Route

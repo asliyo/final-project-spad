@@ -8,10 +8,6 @@ export const login = (data) => {
     return axios.post('http://localhost:3001/login',{session: data}, { withCredentials: true });
 };
 
-export const allUsers = () => {
-    return axios.get(`http://localhost:3001/users`);
-};
-
 export const getUsers = () => {
     return axios.get(`http://localhost:3001/users`);
 };
@@ -20,23 +16,16 @@ export const getUserByID = (id) => {
     return axios.get(`http://localhost:3001/users/${id}`);
 };
 
-// export const logout = (props) => {
-//     axios.delete('http://localhost:3001/logout', { withCredentials: true })
-//     .then(response => {
-//         props.handleLogout()
-//         props.history.push('/')
-//     })
-//     .catch(error => console.log(error))
-// };
-
-
+export const signup = (data) => {
+    axios.post('http://localhost:3001/users', { user: data }, { withCredentials: true })
+}
 
 const UserAPI = {
     isLoggedin,
     login,
-    allUsers,
     getUsers,
     getUserByID,
+    signup
 }
 
 export default UserAPI;
